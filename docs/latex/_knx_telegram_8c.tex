@@ -1,0 +1,498 @@
+\doxysection{src/\+Knx\+Telegram.c File Reference}
+\hypertarget{_knx_telegram_8c}{}\label{_knx_telegram_8c}\index{src/KnxTelegram.c@{src/KnxTelegram.c}}
+{\ttfamily \#include \"{}Knx\+Telegram.\+h\"{}}\newline
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{_knx_telegram_8c_ae838c20709eeac45ab2c75e48e9c996d}{knx\+Create\+Control\+Field}} (bool retransmission, char \texorpdfstring{$\ast$}{*}priority)
+\begin{DoxyCompactList}\small\item\em Create 8 bits control field. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_knx_control}{Knx\+Control}} \mbox{\hyperlink{_knx_telegram_8c_ac003f014be67be210b8fedaf4b7aa59d}{knx\+Decode\+Control\+Field}} (uint8\+\_\+t field)
+\begin{DoxyCompactList}\small\item\em Decode 8 bits of control field Priority\+: -\/\texorpdfstring{$>$}{>} 00 = System functions -\/\texorpdfstring{$>$}{>} 01 = Alarm functions -\/\texorpdfstring{$>$}{>} 10 = Normal mode, high priority -\/\texorpdfstring{$>$}{>} 11 = Auto -\/ Normal mode, low priority. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_knx_telegram_8c_ad31db2b46c6585d8b819971a047e752c}{knx\+Print\+Control}} (\mbox{\hyperlink{struct_knx_control}{Knx\+Control}} control)
+\begin{DoxyCompactList}\small\item\em Print control field. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_knx_source_address}{Knx\+Source\+Address}} \mbox{\hyperlink{_knx_telegram_8c_af8c2e95c640c78746cc2874c490042b7}{knx\+Create\+Source\+Address\+Struct\+From\+String}} (char \texorpdfstring{$\ast$}{*}address)
+\begin{DoxyCompactList}\small\item\em Create source adress field from given string in format \"{}area.\+line.\+device\"{}. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{_knx_telegram_8c_ab33bafff10a2f5b298c84a3a84604992}{knx\+Source\+Addres\+From\+Struct\+To\+Field}} (\mbox{\hyperlink{struct_knx_source_address}{Knx\+Source\+Address}} address)
+\begin{DoxyCompactList}\small\item\em Create Source address field from \doxylink{struct_knx_source_address}{Knx\+Source\+Address} struct. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{_knx_telegram_8c_abae07effd3d45ddfa092a994da33b5b4}{knx\+Create\+Source\+Address\+Field\+From\+String}} (char \texorpdfstring{$\ast$}{*}address)
+\begin{DoxyCompactList}\small\item\em Create 16 bit source address field. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_knx_telegram_8c_a04e09f5467e1ce8ffc4b66f96eb3dc44}{knx\+Is\+Valid\+Source\+Address}} (\mbox{\hyperlink{struct_knx_source_address}{Knx\+Source\+Address}} address)
+\begin{DoxyCompactList}\small\item\em Check if source address is valid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_knx_source_address}{Knx\+Source\+Address}} \mbox{\hyperlink{_knx_telegram_8c_a1a11f186759e9d2dcbf7b30c82358dee}{knx\+Decode\+Source\+Address\+Field}} (uint16\+\_\+t field)
+\begin{DoxyCompactList}\small\item\em Decode 16 bits of source address field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_knx_telegram_8c_a692ff9e3ef310ed421ea1aa4defd0970}{knx\+Print\+Source\+Address}} (\mbox{\hyperlink{struct_knx_source_address}{Knx\+Source\+Address}} address)
+\begin{DoxyCompactList}\small\item\em Print source address. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address}} \mbox{\hyperlink{_knx_telegram_8c_a9d45c06247edeeb488fa96d2a5565cd6}{knx\+Decode\+Target\+Physical\+Address\+Field}} (uint16\+\_\+t field)
+\begin{DoxyCompactList}\small\item\em Decode 16 bits of target physical field. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address}} \mbox{\hyperlink{_knx_telegram_8c_a931fb6dc53ab95cb44057a3a32e900f7}{knx\+Decode\+Target\+Group\+Address\+Field}} (uint16\+\_\+t field)
+\begin{DoxyCompactList}\small\item\em Decode 16 bits of target group field. \end{DoxyCompactList}\item 
+\Hypertarget{_knx_telegram_8c_aa2bd8c6652d9b025eef3d78e975f4661}\label{_knx_telegram_8c_aa2bd8c6652d9b025eef3d78e975f4661} 
+uint16\+\_\+t {\bfseries knx\+Target\+Physical\+Address\+Struct\+To\+Field} (\mbox{\hyperlink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address}} address)
+\item 
+\mbox{\hyperlink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address}} \mbox{\hyperlink{_knx_telegram_8c_a617e65e5f6ce0575bf9084df92c4ec6f}{knx\+Create\+Target\+Physical\+Address\+Struct\+From\+String}} (char \texorpdfstring{$\ast$}{*}address)
+\begin{DoxyCompactList}\small\item\em Create \doxylink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address} struct from given string in format \"{}main.\+middle.\+sub\"{}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_knx_telegram_8c_a944b4465530fc366831330aa9f888b9a}{knx\+Print\+Target\+Physical\+Address}} (\mbox{\hyperlink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address}} address)
+\begin{DoxyCompactList}\small\item\em Print target physical address field. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{_knx_telegram_8c_accb8350a36d1f706bd531ec3fa53d535}{knx\+Create\+Target\+Physical\+Address\+Field\+From\+String}} (char \texorpdfstring{$\ast$}{*}address)
+\begin{DoxyCompactList}\small\item\em Create 16 bit target physical address field. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address}} \mbox{\hyperlink{_knx_telegram_8c_aec33c14f0d44455ff7901538e779919e}{knx\+Create\+Target\+Group\+Address\+Struct\+From\+String}} (char \texorpdfstring{$\ast$}{*}address)
+\begin{DoxyCompactList}\small\item\em Create \doxylink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address} struct from given string in format \"{}main.\+middle.\+sub\"{}. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{_knx_telegram_8c_a9acea615b65863a951c9f627b5efb10f}{knx\+Target\+Group\+Address\+Struct\+To\+Field}} (\mbox{\hyperlink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address}} address)
+\begin{DoxyCompactList}\small\item\em Create Target Group address field from \doxylink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address} struct. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{_knx_telegram_8c_a1971f581ebd71e64669a99b49b88e4f1}{knx\+Create\+Target\+Group\+Address\+Field\+From\+String}} (char \texorpdfstring{$\ast$}{*}address)
+\begin{DoxyCompactList}\small\item\em Create 16 bit target group address field. \end{DoxyCompactList}\item 
+\Hypertarget{_knx_telegram_8c_a3017bf23d39d97862d67ff7e13b36e7a}\label{_knx_telegram_8c_a3017bf23d39d97862d67ff7e13b36e7a} 
+void {\bfseries knx\+Print\+Target\+Group\+Address} (\mbox{\hyperlink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address}} address)
+\item 
+void \mbox{\hyperlink{_knx_telegram_8c_a0b892a28ef6967e4e7449ac6eda518b5}{knx\+Set\+Target\+Address\+Type}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}field, bool type)
+\begin{DoxyCompactList}\small\item\em Set target address type 6th byte. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{_knx_telegram_8c_a2c12bbe748ffd679d893529c71fde447}{knx\+Get\+Target\+Address\+Type}} (uint8\+\_\+t field)
+\begin{DoxyCompactList}\small\item\em Get target address type 6th byte. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_knx_telegram_8c_aef4777304c49590d30ed5fe06467830e}{knx\+Set\+Routing\+Counter}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}field, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Set routing counter value Set to 6 to disable 6th byte. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{_knx_telegram_8c_aca8d6c31eb9a94c70a6fca7d027f654c}{knx\+Get\+Routing\+Counter}} (uint8\+\_\+t field)
+\begin{DoxyCompactList}\small\item\em Get value of routing counter 6th byte. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{_knx_telegram_8c_ab924fda856ff0dfb0af6512cf104f6fc}{knx\+Set\+Data\+Length}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}field, uint8\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Set length of data (payload) 6th byte. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{_knx_telegram_8c_a01623cb70ef01ce4e3b44bcbab47c634}{knx\+Create\+Data\+Switch\+Field}} (char \texorpdfstring{$\ast$}{*}cmd, bool state)
+\begin{DoxyCompactList}\small\item\em Create 2 bytes for switch data. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{_knx_telegram_8c_a169605f7178501218e54fdb2c6e6b030}{knx\+Calculate\+Checksum}} (uint8\+\_\+t telegram\mbox{[}$\,$\mbox{]}, uint8\+\_\+t size)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+Mateusz Zolisz \href{mailto:mateusz.zolisz@gmail.com}{\texttt{ mateusz.\+zolisz@gmail.\+com}} 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+2 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2023-\/06-\/01
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2023 
+\end{DoxyCopyright}
+
+
+\doxysubsection{Function Documentation}
+\Hypertarget{_knx_telegram_8c_a169605f7178501218e54fdb2c6e6b030}\label{_knx_telegram_8c_a169605f7178501218e54fdb2c6e6b030} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxCalculateChecksum@{knxCalculateChecksum}}
+\index{knxCalculateChecksum@{knxCalculateChecksum}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxCalculateChecksum()}{knxCalculateChecksum()}}
+{\footnotesize\ttfamily uint8\+\_\+t knx\+Calculate\+Checksum (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{telegram\mbox{[}$\,$\mbox{]},  }\item[{uint8\+\_\+t}]{size }\end{DoxyParamCaption})}
+
+There will be more DPTs soon ... === Checksum === \Hypertarget{_knx_telegram_8c_ae838c20709eeac45ab2c75e48e9c996d}\label{_knx_telegram_8c_ae838c20709eeac45ab2c75e48e9c996d} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxCreateControlField@{knxCreateControlField}}
+\index{knxCreateControlField@{knxCreateControlField}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxCreateControlField()}{knxCreateControlField()}}
+{\footnotesize\ttfamily uint8\+\_\+t knx\+Create\+Control\+Field (\begin{DoxyParamCaption}\item[{bool}]{retransmission,  }\item[{char \texorpdfstring{$\ast$}{*}}]{priority }\end{DoxyParamCaption})}
+
+
+
+Create 8 bits control field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em retransmission} & \\
+\hline
+{\em priority} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_a01623cb70ef01ce4e3b44bcbab47c634}\label{_knx_telegram_8c_a01623cb70ef01ce4e3b44bcbab47c634} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxCreateDataSwitchField@{knxCreateDataSwitchField}}
+\index{knxCreateDataSwitchField@{knxCreateDataSwitchField}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxCreateDataSwitchField()}{knxCreateDataSwitchField()}}
+{\footnotesize\ttfamily uint16\+\_\+t knx\+Create\+Data\+Switch\+Field (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{cmd,  }\item[{bool}]{state }\end{DoxyParamCaption})}
+
+
+
+Create 2 bytes for switch data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd} & \\
+\hline
+{\em state} & (on/off) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_abae07effd3d45ddfa092a994da33b5b4}\label{_knx_telegram_8c_abae07effd3d45ddfa092a994da33b5b4} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxCreateSourceAddressFieldFromString@{knxCreateSourceAddressFieldFromString}}
+\index{knxCreateSourceAddressFieldFromString@{knxCreateSourceAddressFieldFromString}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxCreateSourceAddressFieldFromString()}{knxCreateSourceAddressFieldFromString()}}
+{\footnotesize\ttfamily uint16\+\_\+t knx\+Create\+Source\+Address\+Field\+From\+String (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{address }\end{DoxyParamCaption})}
+
+
+
+Create 16 bit source address field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_af8c2e95c640c78746cc2874c490042b7}\label{_knx_telegram_8c_af8c2e95c640c78746cc2874c490042b7} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxCreateSourceAddressStructFromString@{knxCreateSourceAddressStructFromString}}
+\index{knxCreateSourceAddressStructFromString@{knxCreateSourceAddressStructFromString}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxCreateSourceAddressStructFromString()}{knxCreateSourceAddressStructFromString()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_knx_source_address}{Knx\+Source\+Address}} knx\+Create\+Source\+Address\+Struct\+From\+String (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{address }\end{DoxyParamCaption})}
+
+
+
+Create source adress field from given string in format \"{}area.\+line.\+device\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_knx_source_address}{Knx\+Source\+Address} 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_a1971f581ebd71e64669a99b49b88e4f1}\label{_knx_telegram_8c_a1971f581ebd71e64669a99b49b88e4f1} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxCreateTargetGroupAddressFieldFromString@{knxCreateTargetGroupAddressFieldFromString}}
+\index{knxCreateTargetGroupAddressFieldFromString@{knxCreateTargetGroupAddressFieldFromString}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxCreateTargetGroupAddressFieldFromString()}{knxCreateTargetGroupAddressFieldFromString()}}
+{\footnotesize\ttfamily uint16\+\_\+t knx\+Create\+Target\+Group\+Address\+Field\+From\+String (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{address }\end{DoxyParamCaption})}
+
+
+
+Create 16 bit target group address field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_aec33c14f0d44455ff7901538e779919e}\label{_knx_telegram_8c_aec33c14f0d44455ff7901538e779919e} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxCreateTargetGroupAddressStructFromString@{knxCreateTargetGroupAddressStructFromString}}
+\index{knxCreateTargetGroupAddressStructFromString@{knxCreateTargetGroupAddressStructFromString}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxCreateTargetGroupAddressStructFromString()}{knxCreateTargetGroupAddressStructFromString()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address}} knx\+Create\+Target\+Group\+Address\+Struct\+From\+String (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{address }\end{DoxyParamCaption})}
+
+
+
+Create \doxylink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address} struct from given string in format \"{}main.\+middle.\+sub\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address} 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_accb8350a36d1f706bd531ec3fa53d535}\label{_knx_telegram_8c_accb8350a36d1f706bd531ec3fa53d535} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxCreateTargetPhysicalAddressFieldFromString@{knxCreateTargetPhysicalAddressFieldFromString}}
+\index{knxCreateTargetPhysicalAddressFieldFromString@{knxCreateTargetPhysicalAddressFieldFromString}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxCreateTargetPhysicalAddressFieldFromString()}{knxCreateTargetPhysicalAddressFieldFromString()}}
+{\footnotesize\ttfamily uint16\+\_\+t knx\+Create\+Target\+Physical\+Address\+Field\+From\+String (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{address }\end{DoxyParamCaption})}
+
+
+
+Create 16 bit target physical address field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_a617e65e5f6ce0575bf9084df92c4ec6f}\label{_knx_telegram_8c_a617e65e5f6ce0575bf9084df92c4ec6f} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxCreateTargetPhysicalAddressStructFromString@{knxCreateTargetPhysicalAddressStructFromString}}
+\index{knxCreateTargetPhysicalAddressStructFromString@{knxCreateTargetPhysicalAddressStructFromString}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxCreateTargetPhysicalAddressStructFromString()}{knxCreateTargetPhysicalAddressStructFromString()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address}} knx\+Create\+Target\+Physical\+Address\+Struct\+From\+String (\begin{DoxyParamCaption}\item[{char \texorpdfstring{$\ast$}{*}}]{address }\end{DoxyParamCaption})}
+
+
+
+Create \doxylink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address} struct from given string in format \"{}main.\+middle.\+sub\"{}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address} 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_ac003f014be67be210b8fedaf4b7aa59d}\label{_knx_telegram_8c_ac003f014be67be210b8fedaf4b7aa59d} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxDecodeControlField@{knxDecodeControlField}}
+\index{knxDecodeControlField@{knxDecodeControlField}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxDecodeControlField()}{knxDecodeControlField()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_knx_control}{Knx\+Control}} knx\+Decode\+Control\+Field (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{field }\end{DoxyParamCaption})}
+
+
+
+Decode 8 bits of control field Priority\+: -\/\texorpdfstring{$>$}{>} 00 = System functions -\/\texorpdfstring{$>$}{>} 01 = Alarm functions -\/\texorpdfstring{$>$}{>} 10 = Normal mode, high priority -\/\texorpdfstring{$>$}{>} 11 = Auto -\/ Normal mode, low priority. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_knx_control}{Knx\+Control} 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_a1a11f186759e9d2dcbf7b30c82358dee}\label{_knx_telegram_8c_a1a11f186759e9d2dcbf7b30c82358dee} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxDecodeSourceAddressField@{knxDecodeSourceAddressField}}
+\index{knxDecodeSourceAddressField@{knxDecodeSourceAddressField}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxDecodeSourceAddressField()}{knxDecodeSourceAddressField()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_knx_source_address}{Knx\+Source\+Address}} knx\+Decode\+Source\+Address\+Field (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{field }\end{DoxyParamCaption})}
+
+
+
+Decode 16 bits of source address field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_knx_source_address}{Knx\+Source\+Address} 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_a931fb6dc53ab95cb44057a3a32e900f7}\label{_knx_telegram_8c_a931fb6dc53ab95cb44057a3a32e900f7} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxDecodeTargetGroupAddressField@{knxDecodeTargetGroupAddressField}}
+\index{knxDecodeTargetGroupAddressField@{knxDecodeTargetGroupAddressField}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxDecodeTargetGroupAddressField()}{knxDecodeTargetGroupAddressField()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address}} knx\+Decode\+Target\+Group\+Address\+Field (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{field }\end{DoxyParamCaption})}
+
+
+
+Decode 16 bits of target group field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address} 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_a9d45c06247edeeb488fa96d2a5565cd6}\label{_knx_telegram_8c_a9d45c06247edeeb488fa96d2a5565cd6} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxDecodeTargetPhysicalAddressField@{knxDecodeTargetPhysicalAddressField}}
+\index{knxDecodeTargetPhysicalAddressField@{knxDecodeTargetPhysicalAddressField}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxDecodeTargetPhysicalAddressField()}{knxDecodeTargetPhysicalAddressField()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address}} knx\+Decode\+Target\+Physical\+Address\+Field (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{field }\end{DoxyParamCaption})}
+
+
+
+Decode 16 bits of target physical field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address} 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_aca8d6c31eb9a94c70a6fca7d027f654c}\label{_knx_telegram_8c_aca8d6c31eb9a94c70a6fca7d027f654c} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxGetRoutingCounter@{knxGetRoutingCounter}}
+\index{knxGetRoutingCounter@{knxGetRoutingCounter}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxGetRoutingCounter()}{knxGetRoutingCounter()}}
+{\footnotesize\ttfamily uint8\+\_\+t knx\+Get\+Routing\+Counter (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{field }\end{DoxyParamCaption})}
+
+
+
+Get value of routing counter 6th byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint8\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_a2c12bbe748ffd679d893529c71fde447}\label{_knx_telegram_8c_a2c12bbe748ffd679d893529c71fde447} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxGetTargetAddressType@{knxGetTargetAddressType}}
+\index{knxGetTargetAddressType@{knxGetTargetAddressType}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxGetTargetAddressType()}{knxGetTargetAddressType()}}
+{\footnotesize\ttfamily bool knx\+Get\+Target\+Address\+Type (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{field }\end{DoxyParamCaption})}
+
+
+
+Get target address type 6th byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true\+: group 
+
+false\+: individual 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_a04e09f5467e1ce8ffc4b66f96eb3dc44}\label{_knx_telegram_8c_a04e09f5467e1ce8ffc4b66f96eb3dc44} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxIsValidSourceAddress@{knxIsValidSourceAddress}}
+\index{knxIsValidSourceAddress@{knxIsValidSourceAddress}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxIsValidSourceAddress()}{knxIsValidSourceAddress()}}
+{\footnotesize\ttfamily bool knx\+Is\+Valid\+Source\+Address (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_knx_source_address}{Knx\+Source\+Address}}}]{address }\end{DoxyParamCaption})}
+
+
+
+Check if source address is valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true 
+
+false 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_ad31db2b46c6585d8b819971a047e752c}\label{_knx_telegram_8c_ad31db2b46c6585d8b819971a047e752c} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxPrintControl@{knxPrintControl}}
+\index{knxPrintControl@{knxPrintControl}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxPrintControl()}{knxPrintControl()}}
+{\footnotesize\ttfamily void knx\+Print\+Control (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_knx_control}{Knx\+Control}}}]{control }\end{DoxyParamCaption})}
+
+
+
+Print control field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em control} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_knx_telegram_8c_a692ff9e3ef310ed421ea1aa4defd0970}\label{_knx_telegram_8c_a692ff9e3ef310ed421ea1aa4defd0970} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxPrintSourceAddress@{knxPrintSourceAddress}}
+\index{knxPrintSourceAddress@{knxPrintSourceAddress}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxPrintSourceAddress()}{knxPrintSourceAddress()}}
+{\footnotesize\ttfamily void knx\+Print\+Source\+Address (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_knx_source_address}{Knx\+Source\+Address}}}]{address }\end{DoxyParamCaption})}
+
+
+
+Print source address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_knx_telegram_8c_a944b4465530fc366831330aa9f888b9a}\label{_knx_telegram_8c_a944b4465530fc366831330aa9f888b9a} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxPrintTargetPhysicalAddress@{knxPrintTargetPhysicalAddress}}
+\index{knxPrintTargetPhysicalAddress@{knxPrintTargetPhysicalAddress}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxPrintTargetPhysicalAddress()}{knxPrintTargetPhysicalAddress()}}
+{\footnotesize\ttfamily void knx\+Print\+Target\+Physical\+Address (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_knx_target_physical_address}{Knx\+Target\+Physical\+Address}}}]{address }\end{DoxyParamCaption})}
+
+
+
+Print target physical address field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_knx_telegram_8c_ab924fda856ff0dfb0af6512cf104f6fc}\label{_knx_telegram_8c_ab924fda856ff0dfb0af6512cf104f6fc} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxSetDataLength@{knxSetDataLength}}
+\index{knxSetDataLength@{knxSetDataLength}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxSetDataLength()}{knxSetDataLength()}}
+{\footnotesize\ttfamily void knx\+Set\+Data\+Length (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{field,  }\item[{uint8\+\_\+t}]{length }\end{DoxyParamCaption})}
+
+
+
+Set length of data (payload) 6th byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+{\em length} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_knx_telegram_8c_aef4777304c49590d30ed5fe06467830e}\label{_knx_telegram_8c_aef4777304c49590d30ed5fe06467830e} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxSetRoutingCounter@{knxSetRoutingCounter}}
+\index{knxSetRoutingCounter@{knxSetRoutingCounter}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxSetRoutingCounter()}{knxSetRoutingCounter()}}
+{\footnotesize\ttfamily void knx\+Set\+Routing\+Counter (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{field,  }\item[{uint8\+\_\+t}]{value }\end{DoxyParamCaption})}
+
+
+
+Set routing counter value Set to 6 to disable 6th byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+{\em value} & \\
+\hline
+\end{DoxyParams}
+\Hypertarget{_knx_telegram_8c_a0b892a28ef6967e4e7449ac6eda518b5}\label{_knx_telegram_8c_a0b892a28ef6967e4e7449ac6eda518b5} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxSetTargetAddressType@{knxSetTargetAddressType}}
+\index{knxSetTargetAddressType@{knxSetTargetAddressType}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxSetTargetAddressType()}{knxSetTargetAddressType()}}
+{\footnotesize\ttfamily void knx\+Set\+Target\+Address\+Type (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{field,  }\item[{bool}]{type }\end{DoxyParamCaption})}
+
+
+
+Set target address type 6th byte. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em field} & \\
+\hline
+{\em type} & 
+\begin{DoxyItemize}
+\item true\+: group
+\item false\+: individual 
+\end{DoxyItemize}\\
+\hline
+\end{DoxyParams}
+\Hypertarget{_knx_telegram_8c_ab33bafff10a2f5b298c84a3a84604992}\label{_knx_telegram_8c_ab33bafff10a2f5b298c84a3a84604992} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxSourceAddresFromStructToField@{knxSourceAddresFromStructToField}}
+\index{knxSourceAddresFromStructToField@{knxSourceAddresFromStructToField}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxSourceAddresFromStructToField()}{knxSourceAddresFromStructToField()}}
+{\footnotesize\ttfamily uint16\+\_\+t knx\+Source\+Addres\+From\+Struct\+To\+Field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_knx_source_address}{Knx\+Source\+Address}}}]{address }\end{DoxyParamCaption})}
+
+
+
+Create Source address field from \doxylink{struct_knx_source_address}{Knx\+Source\+Address} struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t 
+\end{DoxyReturn}
+\Hypertarget{_knx_telegram_8c_a9acea615b65863a951c9f627b5efb10f}\label{_knx_telegram_8c_a9acea615b65863a951c9f627b5efb10f} 
+\index{KnxTelegram.c@{KnxTelegram.c}!knxTargetGroupAddressStructToField@{knxTargetGroupAddressStructToField}}
+\index{knxTargetGroupAddressStructToField@{knxTargetGroupAddressStructToField}!KnxTelegram.c@{KnxTelegram.c}}
+\doxysubsubsection{\texorpdfstring{knxTargetGroupAddressStructToField()}{knxTargetGroupAddressStructToField()}}
+{\footnotesize\ttfamily uint16\+\_\+t knx\+Target\+Group\+Address\+Struct\+To\+Field (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address}}}]{address }\end{DoxyParamCaption})}
+
+
+
+Create Target Group address field from \doxylink{struct_knx_target_group_address}{Knx\+Target\+Group\+Address} struct. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+uint16\+\_\+t 
+\end{DoxyReturn}
