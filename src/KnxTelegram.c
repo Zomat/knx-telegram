@@ -2,44 +2,14 @@
  * @file KnxTelegram.c
  * @author Mateusz Zolisz <mateusz.zolisz@gmail.com>
  * @brief 
- * @version 0.1
- * @date 2023-03-22
+ * @version 0.2
+ * @date 2023-06-01
  * 
  * @copyright Copyright (c) 2023
  * 
  */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdbool.h>
-#include <string.h>
-
-typedef struct {
-  uint8_t area;
-  uint8_t line;
-  uint16_t device;
-} KnxSourceAddress;
-
-typedef struct {
-  uint8_t area;
-  uint8_t line;
-  uint16_t device;
-} KnxTargetPhysicalAddress;
-
-typedef struct {
-  uint8_t main;
-  uint8_t middle;
-  uint16_t sub;
-} KnxTargetGroupAddress;
-
-typedef struct {
-  bool retransmission;
-  char* priority;
-} KnxControl;
-
-typedef struct {
-
-} KnxTelegram;
+#include "KnxTelegram.h"
 
 /**
  * @brief Create 8 bits control field
@@ -76,11 +46,11 @@ uint8_t knxCreateControlField(bool retransmission, char* priority) {
     priorityMatch = true;
   }
 
-  if (! priorityMatch) {
-    return -1;
+  if (priorityMatch) {
+    return field;
   }
 
-  return field;
+  return 0;
 }
 
 /**
@@ -128,15 +98,15 @@ void knxPrintControl(KnxControl control) {
 }
 
 /**
- * @brief Create KnxSourceAddress struct from given string in format "area/line/device"
+ * @brief Create source adress field from given string in format "area.line.device"
  * 
  * @param address 
  * @return KnxSourceAddress 
  */
-KnxSourceAddress knxCreateSourceAddressFromString(char* address) {
+KnxSourceAddress knxCreateSourceAddressStructFromString(char* address) {
   KnxSourceAddress sourceAddress = {0, 0, 0};
   uint8_t area, line, device;
-  if (sscanf(address, "%hhu/%hhu/%hhu", &area, &line, &device) != 3) {
+  if (sscanf(address, "%hhu.%hhu.%hhu", &area, &line, &device) != 3) {
     return sourceAddress;
   }
 
@@ -148,24 +118,37 @@ KnxSourceAddress knxCreateSourceAddressFromString(char* address) {
 }
 
 /**
+ * @brief Create Source address field from KnxSourceAddress struct
+ * 
+ * @param address 
+ * @return uint16_t 
+ */
+uint16_t knxSourceAddresFromStructToField(KnxSourceAddress address) {
+  uint16_t field;
+  
+  // Set individual address
+  field = ((address.device) & 0xFF);
+
+  // Set line address
+  field |= ((address.line & 0x0F) << 8);
+
+  // set area address
+  field |= ((address.area & 0x0F) << 12);
+
+  return field;
+}
+
+/**
  * @brief Create 16 bit source address field
  * 
  * @param address 
  * @return uint16_t 
  */
-uint16_t knxCreateSourceAddressField(KnxSourceAddress address) {
+uint16_t knxCreateSourceAddressFieldFromString(char* address) {
   uint16_t field;
+  KnxSourceAddress addressStruct = knxCreateSourceAddressStructFromString(address);
   
-  // Set individual address
-  field = (address.device & 0xFF);
-
-  // Set line address
-  field |= ((address.line & 0x0F) << (8));
-
-  // set area address
-  field |= ((address.area & 0x0F) << (12));
-
-  return field;
+  return knxSourceAddresFromStructToField(addressStruct);
 }
 
 /**
@@ -237,7 +220,7 @@ KnxTargetGroupAddress knxDecodeTargetGroupAddressField(uint16_t field) {
     return target;
 }
 
-uint16_t knxCreateTargetPhysicalAddressField(KnxTargetPhysicalAddress address) {
+uint16_t knxTargetPhysicalAddressStructToField(KnxTargetPhysicalAddress address) {
     uint16_t field;
   
     // Set individual address
@@ -252,11 +235,74 @@ uint16_t knxCreateTargetPhysicalAddressField(KnxTargetPhysicalAddress address) {
     return field;
 }
 
+/**
+ * @brief Create KnxTargetPhysicalAddress struct from given string in format "main.middle.sub"
+ * 
+ * @param address 
+ * @return KnxTargetPhysicalAddress
+ */
+KnxTargetPhysicalAddress knxCreateTargetPhysicalAddressStructFromString(char* address) {
+  KnxTargetPhysicalAddress targetAddress = {0, 0, 0};
+  uint8_t area, line, device;
+  if (sscanf(address, "%hhu.%hhu.%hhu", &area, &line, &device) != 3) {
+    return targetAddress;
+  }
+
+  targetAddress.area = area;
+  targetAddress.line = line;
+  targetAddress.device = device;
+
+  return targetAddress;
+}
+
+/**
+ * @brief Print target physical address field
+ * 
+ * @param address 
+ */
 void knxPrintTargetPhysicalAddress(KnxTargetPhysicalAddress address) {
   printf("Area: %d, Line: %d, Individual: %d \n", address.area, address.line, address.device);
 }
 
-uint16_t knxCreateTargetGroupAddressField(KnxTargetGroupAddress address) {
+/**
+ * @brief Create 16 bit target physical address field
+ * 
+ * @param address 
+ * @return uint16_t 
+ */
+uint16_t knxCreateTargetPhysicalAddressFieldFromString(char* address) {
+  KnxTargetPhysicalAddress addressStruct = knxCreateTargetPhysicalAddressStructFromString(address);
+  
+  return knxTargetPhysicalAddressStructToField(addressStruct);
+}
+
+/**
+ * @brief Create KnxTargetGroupAddress struct from given string in format "main.middle.sub"
+ * 
+ * @param address 
+ * @return KnxTargetGroupAddress
+ */
+KnxTargetGroupAddress knxCreateTargetGroupAddressStructFromString(char* address) {
+  KnxTargetGroupAddress targetAddress = {0, 0, 0};
+  uint8_t main, middle, sub;
+  if (sscanf(address, "%hhu.%hhu.%hhu", &main, &middle, &sub) != 3) {
+    return targetAddress;
+  }
+
+  targetAddress.main = main;
+  targetAddress.middle = middle;
+  targetAddress.sub = sub;
+
+  return targetAddress;
+}
+
+/**
+ * @brief Create Target Group address field from KnxTargetGroupAddress struct
+ * 
+ * @param address 
+ * @return uint16_t 
+ */
+uint16_t knxTargetGroupAddressStructToField(KnxTargetGroupAddress address) {
   uint16_t field;
 
   // Set sub address
@@ -269,6 +315,18 @@ uint16_t knxCreateTargetGroupAddressField(KnxTargetGroupAddress address) {
   field |= (address.main << 11);
 
   return field;
+}
+
+/**
+ * @brief Create 16 bit target group address field
+ * 
+ * @param address 
+ * @return uint16_t 
+ */
+uint16_t knxCreateTargetGroupAddressFieldFromString(char* address) {
+  KnxTargetGroupAddress addressStruct = knxCreateTargetGroupAddressStructFromString(address);
+  
+  return knxTargetGroupAddressStructToField(addressStruct);
 }
 
 void knxPrintTargetGroupAddress(KnxTargetGroupAddress address) {
@@ -300,7 +358,7 @@ bool knxGetTargetAddressType(uint8_t field) {
 
 /**
  * @brief Set routing counter value
- * 7 is max and means, that filtering is disabled
+ * Set to 6 to disable
  * 6th byte
  * @param field 
  * @param value 
@@ -331,21 +389,8 @@ uint8_t knxGetRoutingCounter(uint8_t field) {
  * @param length 
  */
 void knxSetDataLength(uint8_t *field, uint8_t length) {
-  *field |= (length - 1) & 0x0F;
+  *field |= length & 0x0F;
 }
-
-/** === N_PDU === 
- * 6h byte - address type, routing, data length
- * 
- * === T_PDU ===
- * 7th byte -
- *    - 2 bits -> Type of transport layer communication
- *    - 4 bits -> sequence number (no meaning, if unnumbered)
- *    === A_PDU ===
- *      - 2 bits -> (default: 00)
- *      - OR? if UDP or NDP
- *        - next 4 bits
-*/
 
 /**
  * @brief Create 2 bytes for switch data
@@ -382,14 +427,14 @@ uint16_t knxCreateDataSwitchField(char* cmd, bool state) {
   return field;
 }
 
-uint8_t knxCalculateChecksum(uint8_t telegram[])
+uint8_t knxCalculateChecksum(uint8_t telegram[], uint8_t size)
 {
-  uint8_t indexChecksum, xorSum=0;  
-  indexChecksum = 6 + 1 + 1;
+  uint8_t indexChecksum, xorSum = 0;  
+  indexChecksum = size-1;
   for (uint8_t i = 0; i < indexChecksum ; i++) {
     xorSum ^= telegram[i]; // XOR Sum of all the databytes
   }
   
-  return (uint8_t)(~xorSum); // Checksum equals 1's complement of databytes XOR sum
+  // Checksum equals 1's complement of databytes XOR sum
+  return (uint8_t)(~xorSum); 
 }
-
