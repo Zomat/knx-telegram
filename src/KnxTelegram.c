@@ -145,9 +145,7 @@ uint16_t knxSourceAddresFromStructToField(KnxSourceAddress address) {
  * @return uint16_t 
  */
 uint16_t knxCreateSourceAddressFieldFromString(char* address) {
-  uint16_t field;
   KnxSourceAddress addressStruct = knxCreateSourceAddressStructFromString(address);
-  
   return knxSourceAddresFromStructToField(addressStruct);
 }
 
@@ -325,7 +323,6 @@ uint16_t knxTargetGroupAddressStructToField(KnxTargetGroupAddress address) {
  */
 uint16_t knxCreateTargetGroupAddressFieldFromString(char* address) {
   KnxTargetGroupAddress addressStruct = knxCreateTargetGroupAddressStructFromString(address);
-  
   return knxTargetGroupAddressStructToField(addressStruct);
 }
 
