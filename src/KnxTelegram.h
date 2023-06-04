@@ -31,6 +31,12 @@
 #include <stdbool.h>
 #include <string.h>
 
+/* 4 MSB bits has no evaluation */
+#define KNX_CMD_VALUE_RESPONSE 0b00000001
+#define KNX_CMD_VALUE_READ 0b00000000
+#define KNX_CMD_VALUE_WRITE 0b00000010
+#define KNX_CMD_MEMORY_WRITE 0b00001010
+
 typedef struct {
   uint8_t area;
   uint8_t line;
@@ -91,7 +97,14 @@ uint8_t knxGetRoutingCounter(uint8_t field);
 
 /** === Data Field === */
 void knxSetDataLength(uint8_t *field, uint8_t length);
-uint16_t knxCreateDataSwitchField(char* cmd, bool state);
+uint8_t knxGetDataLength(uint8_t field);
+
+// DPT - Switch (1.001)
+uint16_t knxCreateDataSwitchField(uint8_t cmd, bool state);
+
+// DPT - Dimming
+uint32_t knxCreateDataDimmingField(uint8_t cmd, uint8_t value);
+
 /** There will be more DPTs soon ... */
 
 /** === Checksum === */

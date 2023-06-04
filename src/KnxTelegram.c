@@ -270,7 +270,6 @@ void knxPrintTargetPhysicalAddress(KnxTargetPhysicalAddress address) {
  */
 uint16_t knxCreateTargetPhysicalAddressFieldFromString(char* address) {
   KnxTargetPhysicalAddress addressStruct = knxCreateTargetPhysicalAddressStructFromString(address);
-  
   return knxTargetPhysicalAddressStructToField(addressStruct);
 }
 
@@ -376,7 +375,7 @@ void knxSetRoutingCounter(uint8_t *field, uint8_t value) {
  * @return uint8_t 
  */
 uint8_t knxGetRoutingCounter(uint8_t field) {
-  return ((field & 0x70) >> 4);
+  return ((field & 0b01110000) >> 4);
 }
 
 /**
@@ -390,36 +389,52 @@ void knxSetDataLength(uint8_t *field, uint8_t length) {
 }
 
 /**
+ * @brief Get length of data (payload)
+ * 6th byte
+ * @param field 
+ * @param length 
+ */
+uint8_t knxGetDataLength(uint8_t field) {
+  return (field & 0x0F);
+}
+
+/**
  * @brief Create 2 bytes for switch data
  * 
  * @param cmd 
  * @param state (on/off)
  * @return uint16_t 
  */
-uint16_t knxCreateDataSwitchField(char* cmd, bool state) {
-  uint16_t field = 0x00;
+uint16_t knxCreateDataSwitchField(uint8_t cmd, bool state) {
+  uint16_t field = 0;
 
   // First 6 bits has no evaluation
-
   // Next 4 bits is command
-  // Default: "value_read"
+  field |= (cmd << 6);
 
-  if (strcmp(cmd, "value_response") == 0) {
-    field |= (0b0001 << 6);
-  }
-
-  if (strcmp(cmd, "value_write") == 0) {
-    field |= (0b0010 << 6);
-  }
-
-  if (strcmp(cmd, "memory_write") == 0) {
-    field |= (0b1010 << 6);
-  }
-
-  // Next 6 bits is object
-  // For switch is only one bit
-
+  // Next 5 has no evaluation
+  // LSB is switch state
   field |= state;
+
+  return field;
+}
+
+/**
+ * @brief Create 3 bytes for switch data
+ * First 1 most significiant byte has no evaluation
+ * @param cmd 
+ * @param state (on/off)
+ * @return uint16_t 
+ */
+uint32_t knxCreateDataDimmingField(uint8_t cmd, uint8_t value) {
+  uint32_t field = 0;
+  // First 12 bits has no evaluation
+  // Next 4 bits is command
+  field |= (cmd << 14);
+
+  // Next 6 bits has no evaluation
+  // LSB 1 byte is value
+  field |= value;
 
   return field;
 }
