@@ -37,7 +37,7 @@ int main(int argc, char **argv) {
   knxSetDataLength(&byte5, 2);
 
   /* === Data === */
-  uint16_t data = knxCreateDataDimmingField(KNX_CMD_VALUE_WRITE, 153);
+  uint32_t data = knxCreateDataDimmingField(KNX_CMD_VALUE_WRITE, 153);
 
   /* Print telegram data */
   knxPrintControl(knxDecodeControlField(controlByte));
@@ -64,9 +64,6 @@ int main(int argc, char **argv) {
   for (int i = 0; i < sizeof(telegram)/sizeof(uint8_t); i++) {
     printByte(telegram[i]);
   }
-   printf("CHECK: \n");
-   printByte(telegram[8]);
-
 
   return 0;
 }
