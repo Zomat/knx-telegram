@@ -15,6 +15,6 @@ This project is licensed under the MIT License. Feel free to use and modify it a
 This project was inspired by the need for a simple and efficient way to create KNX frames for Switch and Dimmer DPTs.
 
 # Contact
-If you have any questions or inquiries, you can reach us at mateusz.zolisz@gmail.com.
+If you have any questions or inquiries, you can reach me at mateusz.zolisz@gmail.com.
 
 Happy hacking!
