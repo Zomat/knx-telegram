@@ -2,8 +2,8 @@
  * @file KnxTelegram.h
  * @author Mateusz Zolisz <mateusz.zolisz@gmail.com>
  * @brief 
- * @version 0.2
- * @date 2023-06-01
+ * @version 0.3
+ * @date 2023-06-20
  * 
  * @copyright Copyright (c) 2023
  * 
