@@ -18,7 +18,7 @@
  * @param priority 
  * @return uint8_t 
  */
-uint8_t knxCreateControlField(bool retransmission, char* priority) {
+uint8_t knx_create_control_field(bool retransmission, char* priority) {
   uint8_t field = 0b10110000;
   bool priorityMatch = false;
 
@@ -64,7 +64,7 @@ uint8_t knxCreateControlField(bool retransmission, char* priority) {
  * @param field 
  * @return KnxControl 
  */
-KnxControl knxDecodeControlField(uint8_t field) {
+KnxControl knx_decode_control_field(uint8_t field) {
   KnxControl control;
   bool priorityMsbBit = (field & (1 << 3));
   bool priorityLsbBit = (field & (1 << 2));
@@ -93,7 +93,7 @@ KnxControl knxDecodeControlField(uint8_t field) {
  * 
  * @param control 
  */
-void knxPrintControl(KnxControl control) {
+void knx_print_control(KnxControl control) {
   printf("Retransmission: %s, Priority: %s \n", control.retransmission ? "true" : "false", control.priority);
 }
 
@@ -103,7 +103,7 @@ void knxPrintControl(KnxControl control) {
  * @param address 
  * @return KnxSourceAddress 
  */
-KnxSourceAddress knxCreateSourceAddressStructFromString(char* address) {
+KnxSourceAddress knx_create_source_address_struct_from_string(char* address) {
   KnxSourceAddress sourceAddress = {0, 0, 0};
   uint8_t area, line, device;
   if (sscanf(address, "%hhu.%hhu.%hhu", &area, &line, &device) != 3) {
@@ -123,7 +123,7 @@ KnxSourceAddress knxCreateSourceAddressStructFromString(char* address) {
  * @param address 
  * @return uint16_t 
  */
-uint16_t knxSourceAddresFromStructToField(KnxSourceAddress address) {
+uint16_t knx_source_addres_from_struct_to_field(KnxSourceAddress address) {
   uint16_t field;
   
   // Set individual address
@@ -144,9 +144,9 @@ uint16_t knxSourceAddresFromStructToField(KnxSourceAddress address) {
  * @param address 
  * @return uint16_t 
  */
-uint16_t knxCreateSourceAddressFieldFromString(char* address) {
-  KnxSourceAddress addressStruct = knxCreateSourceAddressStructFromString(address);
-  return knxSourceAddresFromStructToField(addressStruct);
+uint16_t knx_create_source_address_field_from_string(char* address) {
+  KnxSourceAddress addressStruct = knx_create_source_address_struct_from_string(address);
+  return knx_source_addres_from_struct_to_field(addressStruct);
 }
 
 /**
@@ -156,7 +156,7 @@ uint16_t knxCreateSourceAddressFieldFromString(char* address) {
  * @return true 
  * @return false 
  */
-bool knxIsValidSourceAddress(KnxSourceAddress address) {
+bool knx_is_valid_source_address(KnxSourceAddress address) {
   if (address.device == 0) {
     return false;
   }
@@ -170,7 +170,7 @@ bool knxIsValidSourceAddress(KnxSourceAddress address) {
  * @param field 
  * @return KnxSourceAddress 
  */
-KnxSourceAddress knxDecodeSourceAddressField(uint16_t field) {
+KnxSourceAddress knx_decode_source_address_field(uint16_t field) {
     KnxSourceAddress source;
     source.area = ((field & 0xF000) >> 12);
     source.line = ((field & 0x0F00) >> 8);
@@ -184,7 +184,7 @@ KnxSourceAddress knxDecodeSourceAddressField(uint16_t field) {
  * 
  * @param address 
  */
-void knxPrintSourceAddress(KnxSourceAddress address) {
+void knx_print_source_address(KnxSourceAddress address) {
   printf("Area: %d, Line: %d, Individual: %d \n", address.area, address.line, address.device);
 }
 
@@ -194,7 +194,7 @@ void knxPrintSourceAddress(KnxSourceAddress address) {
  * @param field 
  * @return KnxTargetPhysicalAddress 
  */
-KnxTargetPhysicalAddress knxDecodeTargetPhysicalAddressField(uint16_t field) {
+KnxTargetPhysicalAddress knx_decode_target_physical_address_field(uint16_t field) {
     KnxTargetPhysicalAddress target;
     target.area = ((field & 0xF000) >> 12);
     target.line = ((field & 0x0F00) >> 8);
@@ -209,7 +209,7 @@ KnxTargetPhysicalAddress knxDecodeTargetPhysicalAddressField(uint16_t field) {
  * @param field 
  * @return KnxTargetGroupAddress 
  */
-KnxTargetGroupAddress knxDecodeTargetGroupAddressField(uint16_t field) {
+KnxTargetGroupAddress knx_decode_target_group_address_field(uint16_t field) {
     KnxTargetGroupAddress target;
     target.main = ((field & 0x7800) >> 11);
     target.middle = ((field & 0x0700) >> 8);
@@ -218,7 +218,7 @@ KnxTargetGroupAddress knxDecodeTargetGroupAddressField(uint16_t field) {
     return target;
 }
 
-uint16_t knxTargetPhysicalAddressStructToField(KnxTargetPhysicalAddress address) {
+uint16_t knx_target_physical_address_struct_to_field(KnxTargetPhysicalAddress address) {
     uint16_t field;
   
     // Set individual address
@@ -239,7 +239,7 @@ uint16_t knxTargetPhysicalAddressStructToField(KnxTargetPhysicalAddress address)
  * @param address 
  * @return KnxTargetPhysicalAddress
  */
-KnxTargetPhysicalAddress knxCreateTargetPhysicalAddressStructFromString(char* address) {
+KnxTargetPhysicalAddress knx_create_target_physical_address_struct_from_string(char* address) {
   KnxTargetPhysicalAddress targetAddress = {0, 0, 0};
   uint8_t area, line, device;
   if (sscanf(address, "%hhu.%hhu.%hhu", &area, &line, &device) != 3) {
@@ -258,7 +258,7 @@ KnxTargetPhysicalAddress knxCreateTargetPhysicalAddressStructFromString(char* ad
  * 
  * @param address 
  */
-void knxPrintTargetPhysicalAddress(KnxTargetPhysicalAddress address) {
+void knx_print_target_physical_address(KnxTargetPhysicalAddress address) {
   printf("Area: %d, Line: %d, Individual: %d \n", address.area, address.line, address.device);
 }
 
@@ -268,9 +268,9 @@ void knxPrintTargetPhysicalAddress(KnxTargetPhysicalAddress address) {
  * @param address 
  * @return uint16_t 
  */
-uint16_t knxCreateTargetPhysicalAddressFieldFromString(char* address) {
-  KnxTargetPhysicalAddress addressStruct = knxCreateTargetPhysicalAddressStructFromString(address);
-  return knxTargetPhysicalAddressStructToField(addressStruct);
+uint16_t knx_create_target_physical_address_field_from_string(char* address) {
+  KnxTargetPhysicalAddress addressStruct = knx_create_target_physical_address_struct_from_string(address);
+  return knx_target_physical_address_struct_to_field(addressStruct);
 }
 
 /**
@@ -279,7 +279,7 @@ uint16_t knxCreateTargetPhysicalAddressFieldFromString(char* address) {
  * @param address 
  * @return KnxTargetGroupAddress
  */
-KnxTargetGroupAddress knxCreateTargetGroupAddressStructFromString(char* address) {
+KnxTargetGroupAddress knx_create_target_group_address_struct_from_string(char* address) {
   KnxTargetGroupAddress targetAddress = {0, 0, 0};
   uint8_t main, middle, sub;
   if (sscanf(address, "%hhu.%hhu.%hhu", &main, &middle, &sub) != 3) {
@@ -299,7 +299,7 @@ KnxTargetGroupAddress knxCreateTargetGroupAddressStructFromString(char* address)
  * @param address 
  * @return uint16_t 
  */
-uint16_t knxTargetGroupAddressStructToField(KnxTargetGroupAddress address) {
+uint16_t knx_target_group_address_struct_to_field(KnxTargetGroupAddress address) {
   uint16_t field;
 
   // Set sub address
@@ -320,12 +320,12 @@ uint16_t knxTargetGroupAddressStructToField(KnxTargetGroupAddress address) {
  * @param address 
  * @return uint16_t 
  */
-uint16_t knxCreateTargetGroupAddressFieldFromString(char* address) {
-  KnxTargetGroupAddress addressStruct = knxCreateTargetGroupAddressStructFromString(address);
-  return knxTargetGroupAddressStructToField(addressStruct);
+uint16_t knx_create_target_group_address_field_from_string(char* address) {
+  KnxTargetGroupAddress addressStruct = knx_create_target_group_address_struct_from_string(address);
+  return knx_target_group_address_struct_to_field(addressStruct);
 }
 
-void knxPrintTargetGroupAddress(KnxTargetGroupAddress address) {
+void knx_print_target_group_address(KnxTargetGroupAddress address) {
   printf("Main: %d, Middle: %d, Sub: %d \n", address.main, address.middle, address.sub);
 }
 
@@ -337,7 +337,7 @@ void knxPrintTargetGroupAddress(KnxTargetGroupAddress address) {
  *  - true: group
  *  - false: individual 
  */
-void knxSetTargetAddressType(uint8_t *field, bool type) {
+void knx_set_target_address_type(uint8_t *field, bool type) {
   *field |= (type << 7);
 }
 
@@ -348,7 +348,7 @@ void knxSetTargetAddressType(uint8_t *field, bool type) {
  * @return true: group 
  * @return false: individual
  */
-bool knxGetTargetAddressType(uint8_t field) {
+bool knx_get_target_address_type(uint8_t field) {
   return (field & (1 << 7)) > 0;
 }
 
@@ -359,7 +359,7 @@ bool knxGetTargetAddressType(uint8_t field) {
  * @param field 
  * @param value 
  */
-void knxSetRoutingCounter(uint8_t *field, uint8_t value) {
+void knx_set_routing_counter(uint8_t *field, uint8_t value) {
   // Max value is 7
   if (value > 7) {
     value = 7;
@@ -374,7 +374,7 @@ void knxSetRoutingCounter(uint8_t *field, uint8_t value) {
  * @param field 
  * @return uint8_t 
  */
-uint8_t knxGetRoutingCounter(uint8_t field) {
+uint8_t knx_get_routing_counter(uint8_t field) {
   return ((field & 0b01110000) >> 4);
 }
 
@@ -384,7 +384,7 @@ uint8_t knxGetRoutingCounter(uint8_t field) {
  * @param field 
  * @param length 
  */
-void knxSetDataLength(uint8_t *field, uint8_t length) {
+void knx_set_data_length(uint8_t *field, uint8_t length) {
   *field |= length & 0x0F;
 }
 
@@ -394,7 +394,7 @@ void knxSetDataLength(uint8_t *field, uint8_t length) {
  * @param field 
  * @param length 
  */
-uint8_t knxGetDataLength(uint8_t field) {
+uint8_t knx_get_data_length(uint8_t field) {
   return (field & 0x0F);
 }
 
@@ -405,7 +405,7 @@ uint8_t knxGetDataLength(uint8_t field) {
  * @param state (on/off)
  * @return uint16_t 
  */
-uint16_t knxCreateDataSwitchField(uint8_t cmd, bool state) {
+uint16_t knx_create_data_switch_field(uint8_t cmd, bool state) {
   uint16_t field = 0;
 
   // First 6 bits has no evaluation
@@ -426,7 +426,7 @@ uint16_t knxCreateDataSwitchField(uint8_t cmd, bool state) {
  * @param value (0-255)
  * @return uint32_t 
  */
-uint32_t knxCreateDataDimmingField(uint8_t cmd, uint8_t value) {
+uint32_t knx_create_data_dimming_field(uint8_t cmd, uint8_t value) {
   uint32_t field = 0;
   // First 12 bits has no evaluation
   // Next 4 bits is command
@@ -439,7 +439,7 @@ uint32_t knxCreateDataDimmingField(uint8_t cmd, uint8_t value) {
   return field;
 }
 
-uint8_t knxCalculateChecksum(uint8_t telegram[], uint8_t size)
+uint8_t knx_calculate_checksum(uint8_t telegram[], uint8_t size)
 {
   uint8_t indexChecksum, xorSum = 0;  
   indexChecksum = size-1;

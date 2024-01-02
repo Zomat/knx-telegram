@@ -9,20 +9,6 @@
  * 
  */
 
-/**
- * KNX Telegram Description
- * 
- * Telegram Fields:
- *  -> Control Field (1 byte)
- *  -> Source Address (2 bytes)
- *  -> Target Address (2 bytes + 1 bit)
- *  -> Routing (3 bits)
- *  -> Length (4 bits)
- *  -> Data (Up to 16 bytes)
- *  -> Check (1 byte)
- *   
- */
-
 #ifndef KNX_TELEGRAM_H
 #define KNX_TELEGRAM_H
 
@@ -31,7 +17,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-/* 4 MSB bits has no evaluation */
+/* 4 MSB bits have no evaluation */
 #define KNX_CMD_VALUE_RESPONSE 0b00000001
 #define KNX_CMD_VALUE_READ 0b00000000
 #define KNX_CMD_VALUE_WRITE 0b00000010
@@ -65,53 +51,63 @@ typedef struct {
 } KnxControl;
 
 /** === Control Field === */
-uint8_t knxCreateControlField(bool retransmission, char* priority);
-KnxControl knxDecodeControlField(uint8_t field);
-void knxPrintControl(KnxControl control);
+
+uint8_t knx_create_control_field(bool retransmission, char* priority);
+KnxControl knx_decode_control_field(uint8_t field);
+void knx_print_control(KnxControl control);
 
 /** === Source address === */
-KnxSourceAddress knxCreateSourceAddressStructFromString(char* address);
-uint16_t knxSourceAddresFromStructToField(KnxSourceAddress address);
-uint16_t knxCreateSourceAddressFieldFromString(char* address);
-bool knxIsValidSourceAddress(KnxSourceAddress address);
-KnxSourceAddress knxDecodeSourceAddressField(uint16_t field);
-void knxPrintSourceAddress(KnxSourceAddress address);
+
+KnxSourceAddress knx_create_source_address_struct_from_string(char* address);
+uint16_t knx_source_address_from_struct_to_field(KnxSourceAddress address);
+uint16_t knx_create_source_address_field_from_string(char* address);
+bool knx_is_valid_source_address(KnxSourceAddress address);
+KnxSourceAddress knx_decode_source_address_field(uint16_t field);
+void knx_print_source_address(KnxSourceAddress address);
 
 /** === Target Physical (Individual) address  === */
-KnxTargetPhysicalAddress knxDecodeTargetPhysicalAddressField(uint16_t field);
-KnxTargetGroupAddress knxDecodeTargetGroupAddressField(uint16_t field);
-uint16_t knxTargetPhysicalAddressStructToField(KnxTargetPhysicalAddress address);
-KnxTargetPhysicalAddress knxCreateTargetPhysicalAddressStructFromString(char* address);
-void knxPrintTargetPhysicalAddress(KnxTargetPhysicalAddress address);
+
+KnxTargetPhysicalAddress knx_decode_target_physical_address_field(uint16_t field);
+KnxTargetGroupAddress knx_decode_target_group_address_field(uint16_t field);
+uint16_t knx_target_physical_address_struct_to_field(KnxTargetPhysicalAddress address);
+KnxTargetPhysicalAddress knx_create_target_physical_address_struct_from_string(char* address);
+void knx_print_target_physical_address(KnxTargetPhysicalAddress address);
 
 /** === Target Group address  === */
-uint16_t knxCreateTargetPhysicalAddressFieldFromString(char* address);
-KnxTargetGroupAddress knxCreateTargetGroupAddressStructFromString(char* address);
-uint16_t knxTargetGroupAddressStructToField(KnxTargetGroupAddress address);
-uint16_t knxCreateTargetGroupAddressFieldFromString(char* address);
-void knxPrintTargetGroupAddress(KnxTargetGroupAddress address);
+
+uint16_t knx_create_target_physical_address_field_from_string(char* address);
+KnxTargetGroupAddress knx_create_target_group_address_struct_from_string(char* address);
+uint16_t knx_target_group_address_struct_to_field(KnxTargetGroupAddress address);
+uint16_t knx_create_target_group_address_field_from_string(char* address);
+void knx_print_target_group_address(KnxTargetGroupAddress address);
 
 /** === Target address type*/
-void knxSetTargetAddressType(uint8_t *field, bool type);
-bool knxGetTargetAddressType(uint8_t field);
+
+void knx_set_target_address_type(uint8_t *field, bool type);
+bool knx_get_target_address_type(uint8_t field);
 
 /** === Routing counter === */
-void knxSetRoutingCounter(uint8_t *field, uint8_t value);
-uint8_t knxGetRoutingCounter(uint8_t field);
+
+void knx_set_routing_counter(uint8_t *field, uint8_t value);
+uint8_t knx_get_routing_counter(uint8_t field);
 
 /** === Data Field === */
-void knxSetDataLength(uint8_t *field, uint8_t length);
-uint8_t knxGetDataLength(uint8_t field);
+
+void knx_set_data_length(uint8_t *field, uint8_t length);
+uint8_t knx_get_data_length(uint8_t field);
 
 // DPT - Switch (1.001)
-uint16_t knxCreateDataSwitchField(uint8_t cmd, bool state);
+
+uint16_t knx_create_data_switch_field(uint8_t cmd, bool state);
 
 // DPT - Dimming
-uint32_t knxCreateDataDimmingField(uint8_t cmd, uint8_t value);
+
+uint32_t knx_create_data_dimming_field(uint8_t cmd, uint8_t value);
 
 /** There will be more DPTs soon ... */
 
 /** === Checksum === */
-uint8_t knxCalculateChecksum(uint8_t telegram[], uint8_t size);
+
+uint8_t knx_calculate_checksum(uint8_t telegram[], uint8_t size);
 
 #endif // KNX_TELEGRAM_H
